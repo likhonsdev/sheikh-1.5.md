@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "name": "sheikh-1-5-enhanced",
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "python3.11"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/health",
+      "dest": "main.py"
+    },
+    {
+      "src": "/chat",
+      "dest": "main.py"
+    },
+    {
+      "src": "/analytics",
+      "dest": "main.py"
+    },
+    {
+      "src": "/docs",
+      "dest": "main.py"
+    },
+    {
+      "src": "/openapi.json",
+      "dest": "main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ],
+  "env": {
+    "MISTRAL_URL": "@mistral-url",
+    "MISTRAL_NONCE": "@mistral-nonce",
+    "REDIS_URL": "@redis-url",
+    "API_SECRET_KEY": "@api-secret-key",
+    "ENVIRONMENT": "production",
+    "MAX_REQUESTS_PER_MINUTE": "30",
+    "MAX_MESSAGE_LENGTH": "2000",
+    "ENABLE_ANALYTICS": "true"
+  },
+  "functions": {
+    "main.py": {
+      "includeFiles": "**",
+      "excludeFiles": [
+        "tests/**",
+        "*.md",
+        ".git/**",
+        "node_modules/**"
+      ]
+    }
+  },
+  "headers": [
+    {
+      "source": "/chat",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}

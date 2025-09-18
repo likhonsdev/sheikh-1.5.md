@@ -1,0 +1,48 @@
+# Enhanced Sheikh 1.5 Requirements
+# ================================
+
+# Core Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# HTTP Client & Async Support
+httpx>=0.25.0
+aiofiles>=23.2.1
+
+# Security & Authentication
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+
+# Rate Limiting & Redis
+slowapi>=0.1.9
+redis>=5.0.0
+hiredis>=2.2.3
+
+# Data Validation & Serialization
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+dynaconf>=3.2.4
+
+# Monitoring & Logging
+structlog>=23.2.0
+rich>=13.7.0
+
+# Database (Optional - for advanced analytics)
+sqlalchemy>=2.0.0
+asyncpg>=0.29.0
+alembic>=1.13.0
+
+# Development Dependencies
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.9.0
+flake8>=6.1.0
+mypy>=1.7.0
+
+# Production Dependencies
+gunicorn>=21.2.0
+prometheus-client>=0.19.0
